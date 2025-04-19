@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: episode4backend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: episode4backend
+  template:
+    metadata:
+      labels:
+        app: episode4backend
+    spec:
+      containers:
+        - name: episode4backend
+          image: sheraztariq22/episode4backend
+          ports:
+            - containerPort: 4000
+          resources:
+            requests:
+              memory: "256Mi" # Request 256 MB of memory
+            limits:
+              memory: "512Mi" # Limit to 512 MB of memory
+          env:
+            - name: MONGO_URL
+              valueFrom:
+                configMapKeyRef:
+                  name: mongo-config
+                  key: mongo-url

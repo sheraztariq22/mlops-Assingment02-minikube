@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: episode4frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: episode4frontend
+  template:
+    metadata:
+      labels:
+        app: episode4frontend
+    spec:
+      containers:
+        - name: episode4frontend
+          image: sheraztariq22/episode4frontend
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+          resources:
+            requests:
+              memory: "256Mi" # Request 256 megabytes of memory
+            limits:
+              memory: "512Mi" # Limit to 512 megabytes of memory
